@@ -109,6 +109,17 @@ public class RNSendIntentModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void sendMessengerText(String body) {
+      Intent sendIntent = getSendIntent(body, "text/plain");
+      sendIntent.setPackage("com.facebook.orca");
+
+      //Check that an app exists to receive the intent
+      if (sendIntent.resolveActivity(this.reactContext.getPackageManager()) != null) {
+        this.reactContext.startActivity(sendIntent);
+      }
+    }
+
+    @ReactMethod
     public void sendMail(String recepientString, String subject, String body) {
       String uriText = "mailto:" + Uri.encode(recepientString) +
             "?body=" + Uri.encode(body) +
