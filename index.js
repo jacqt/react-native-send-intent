@@ -44,8 +44,8 @@ var SendIntentAndroid = {
     openMaps(query) {
         RNSendIntentAndroid.openMaps(query);
     },
-    sendMessengerText(body) {
-        RNSendIntentAndroid.sendMessengerText(body);
+    sendMessengerText(body, onSuccess, onError) {
+        return RNSendIntentAndroid.sendMessengerText(body, onSuccess, onError);
     }
 };
 

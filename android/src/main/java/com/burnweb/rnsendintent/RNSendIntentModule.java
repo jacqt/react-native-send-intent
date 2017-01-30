@@ -109,13 +109,16 @@ public class RNSendIntentModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void sendMessengerText(String body) {
+    public void sendMessengerText(String body, Callback onSuccess, Callback onError) {
       Intent sendIntent = getSendIntent(body, "text/plain");
       sendIntent.setPackage("com.facebook.orca");
 
       //Check that an app exists to receive the intent
       if (sendIntent.resolveActivity(this.reactContext.getPackageManager()) != null) {
         this.reactContext.startActivity(sendIntent);
+        onSuccess.invoke();
+      } else {
+        onError.invoke();
       }
     }
 
